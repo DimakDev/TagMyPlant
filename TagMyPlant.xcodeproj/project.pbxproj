@@ -12,6 +12,8 @@
 		CD233C5D2686E73E00016C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5C2686E73E00016C6D /* Assets.xcassets */; };
 		CD233C602686E73E00016C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */; };
 		CD233C692686E94800016C6D /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = CD233C682686E94800016C6D /* CarBode */; };
+		CD4CE2892687A75B00B0532C /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE2882687A75B00B0532C /* ContentViewModel.swift */; };
+		CD4CE28B2687A8A000B0532C /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE28A2687A8A000B0532C /* ContentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		CD233C5C2686E73E00016C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD233C612686E73E00016C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD4CE2882687A75B00B0532C /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		CD4CE28A2687A8A000B0532C /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				CD233C582686E73D00016C6D /* TagMyPlantApp.swift */,
 				CD233C5A2686E73D00016C6D /* ContentView.swift */,
+				CD4CE2882687A75B00B0532C /* ContentViewModel.swift */,
+				CD4CE28A2687A8A000B0532C /* ContentModel.swift */,
 				CD233C5C2686E73E00016C6D /* Assets.xcassets */,
 				CD233C612686E73E00016C6D /* Info.plist */,
 				CD233C5E2686E73E00016C6D /* Preview Content */,
@@ -147,6 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */,
+				CD4CE28B2687A8A000B0532C /* ContentModel.swift in Sources */,
+				CD4CE2892687A75B00B0532C /* ContentViewModel.swift in Sources */,
 				CD233C592686E73D00016C6D /* TagMyPlantApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
