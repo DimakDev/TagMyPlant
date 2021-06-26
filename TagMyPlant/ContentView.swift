@@ -9,23 +9,41 @@ import SwiftUI
 import CarBode
 import AVFoundation
 
-
 struct ContentView: View {
     
-    @State var isPresentingScanner = false
+    @State private var isPresentingScanner = false
+    
+    var body: some View {
+        ZStack {
+            NavigationView{
+                CodeListView()
+                    .navigationTitle("Scan results")
+            }
+            Button("Open scannerView") {
+                self.isPresentingScanner.toggle()
+            }
+            .sheet(isPresented: $isPresentingScanner) {
+                CodeScannerView(isPresentingScanner: $isPresentingScanner)}
+        }
+    }
+}
+
+struct CodeListView: View {
+    var body: some View {
+        List(0..<10) {item in
+            Text("\(item)")
+        }
+    }
+}
+
+struct CodeScannerView: View {
+    
+    @Binding var isPresentingScanner: Bool
     
     var body: some View {
         VStack {
-            CBScanner(
-                supportBarcode: .constant([.qr, .code128]),
-                scanInterval: .constant(5.0),
-                mockBarCode: .constant(BarcodeData(value:"Mocking data", type: .qr))
-            ){
-                print("BarCodeType =",$0.type.rawValue, "Value =",$0.value)
-                self.isPresentingScanner = false
-            }
-            VStack {
-                Text("Scan the code")
+            Button("Close scannerView") {
+                self.isPresentingScanner.toggle()
             }
         }
     }
@@ -34,5 +52,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        CodeListView()
+        CodeScannerView(isPresentingScanner: .constant(true))
     }
 }
