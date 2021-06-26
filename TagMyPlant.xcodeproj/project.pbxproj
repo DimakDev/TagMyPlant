@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD233C5A2686E73D00016C6D /* ContentView.swift */; };
 		CD233C5D2686E73E00016C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5C2686E73E00016C6D /* Assets.xcassets */; };
 		CD233C602686E73E00016C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */; };
+		CD233C692686E94800016C6D /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = CD233C682686E94800016C6D /* CarBode */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD233C692686E94800016C6D /* CarBode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = TagMyPlant;
+			packageProductDependencies = (
+				CD233C682686E94800016C6D /* CarBode */,
+			);
 			productName = TagMyPlant;
 			productReference = CD233C552686E73D00016C6D /* TagMyPlant.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +117,9 @@
 				Base,
 			);
 			mainGroup = CD233C4C2686E73D00016C6D;
+			packageReferences = (
+				CD233C672686E94800016C6D /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
+			);
 			productRefGroup = CD233C562686E73D00016C6D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -328,6 +336,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD233C672686E94800016C6D /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD233C682686E94800016C6D /* CarBode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD233C672686E94800016C6D /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */;
+			productName = CarBode;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD233C4D2686E73D00016C6D /* Project object */;
 }
