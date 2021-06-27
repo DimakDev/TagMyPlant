@@ -40,22 +40,9 @@ enum BarcodeData {
     }
 }
 
-enum BarcodeError {
-    case invalidUrl
-    case invalidEmail
-    case invalidPhoneNumber
-    case undefinedBarcodeType
-    
-    func get() -> String {
-        switch self {
-        case .invalidUrl:
-            return "BarcodeDataError: Invalid URL"
-        case .invalidEmail:
-            return "BarcodeDataError: Invalid Email"
-        case .invalidPhoneNumber:
-            return "BarcodeDataError: Invalid PhoneNumber"
-        case .undefinedBarcodeType:
-            return "BarcodeTypeError: Undefined BarcodeType"
-        }
-    }
+enum BarcodeError: String {
+    case invalidUrl = "BarcodeDataError: Invalid URL"
+    case invalidEmail = "BarcodeDataError: Invalid Email"
+    case invalidPhoneNumber = "BarcodeDataError: Invalid PhoneNumber"
+    case unknownBarcodeType = "BarcodeTypeError: Unknown BarcodeType"
 }
