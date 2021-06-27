@@ -12,64 +12,60 @@ import AVFoundation
 struct BarcodeScannerView: View {
     
     @StateObject private var controller = BarcodeScannerController()
-    @State private var isPresentingScanner = false
+    @State private var isPresentingCameraView = false
     
     var body: some View {
         ZStack {
             NavigationView{
-                BarcodeListView()
+                BarcodeScannerListView(controller: controller)
                     .navigationTitle("Scan results")
             }
             Button("Open scannerView") {
-                self.isPresentingScanner.toggle()
+                self.isPresentingCameraView.toggle()
             }
-            .sheet(isPresented: $isPresentingScanner) {
-                BarcodeScannerView(isPresentingScanner: $isPresentingScanner)}
+            .sheet(isPresented: $isPresentingCameraView) {
+                BarcodeScannerCameraView(controller: controller)
+            }
         }
     }
 }
 
-struct BarcodeListView: View {
-    var body: some View {
-        List(0..<10) {item in
-            Text("\(item)")
-        }
-    }
-}
-
-struct BarcodeScannerView: View {
+struct BarcodeScannerListView: View {
     
-    @Binding var isPresentingScanner: Bool
+    @ObservedObject var controller: BarcodeScannerController
+    
+    var body: some View {
+        List(controller.barcodes, id: \.id) { barcode in
+            if !barcode.content.isEmpty {
+                Text(barcode.content[0].getType())
+            }
+        }
+    }
+}
+
+struct BarcodeScannerCameraView: View {
+    
+    @ObservedObject var controller: BarcodeScannerController
+    
     var body: some View {
         VStack{
-            
             CBScanner(
-                supportBarcode: .constant([.qr, .code128]), //Set type of barcode you want to scan
-                scanInterval: .constant(5.0) //Event will trigger every 5 seconds
+                supportBarcode: .constant([.qr, .code128]),
+                scanInterval: .constant(5.0)
             ){
-                print($0)
-                print(type(of: $0))
-                print(type(of: $0.type.rawValue))
-                print(type(of: $0.value))
-                //When the scanner found a barcode
+                self.controller.storeBarcodeMetadata(barcodeType: $0.type.rawValue,
+                                                     barcodeContentString: $0.value)
                 print("BarCodeType =",$0.type.rawValue, "Value =",$0.value)
             }
             
         }
-        //    var body: some View {
-        //        VStack {
-        //            Button("Close scannerView") {
-        //                self.isPresentingScanner.toggle()
-        //            }
-        //        }
-        //    }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct BarcodeScannerView_Previews: PreviewProvider {
     static var previews: some View {
         BarcodeScannerView()
-        BarcodeListView()
-        BarcodeScannerView(isPresentingScanner: .constant(true))
+        BarcodeScannerListView(controller: BarcodeScannerController())
+        BarcodeScannerCameraView(controller: BarcodeScannerController())
     }
 }
