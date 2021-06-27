@@ -36,7 +36,14 @@ struct BarcodeScannerListView: View {
     
     var body: some View {
         List(controller.barcodes, id: \.id) { barcode in
-            Text("Data is \(barcode.data.get())")
+            VStack {
+                Text("Type is \(barcode.type)")
+                Text("Data is \(barcode.data.get())")
+                if let error = barcode.error?.rawValue {
+                    Text("Error is \(error)")
+                }
+            }
+            
         }
     }
 }
@@ -48,11 +55,11 @@ struct BarcodeScannerCameraView: View {
     var body: some View {
         VStack{
             CBScanner(
-                supportBarcode: .constant([.qr, .code128]),
+                supportBarcode: .constant([.qr, .code39, .code128]),
                 scanInterval: .constant(5.0)
             ){
-                self.controller.storeBarcodeMetadata(barcodeType: $0.type.rawValue,
-                                                     barcodeContent: $0.value)
+                self.controller.storeBarcodeMetadata(type: $0.type.rawValue,
+                                                     content: $0.value)
                 print("BarCodeType =",$0.type.rawValue, "Value =",$0.value)
             }
             
