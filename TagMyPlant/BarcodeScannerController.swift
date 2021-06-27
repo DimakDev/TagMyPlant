@@ -11,51 +11,94 @@ final class BarcodeScannerController: ObservableObject {
     
     @Published var barcodes: [Barcode] = []
     
-    func storeBarcodeMetadata(barcodeType: String, barcodeContentString: String) {
-        let parsedBarcodeContent = parseBarcodeContent(barcodeContentString: barcodeContentString)
-        let barcode = Barcode(type: barcodeType, content: parsedBarcodeContent)
-        self.barcodes.append(barcode)
-    }
+    private var validator = BarcodeContentValidator()
+    private var preprocessor = BarcodeContentPreprocessor()
     
-    func parseBarcodeContent(barcodeContentString: String) -> [BarcodeContent] {
-        let detector = try! NSDataDetector(types: NSTextCheckingAllTypes)
-        let range = NSRange(location: 0, length: barcodeContentString.utf16.count)
-        let matches = detector.matches(in: barcodeContentString, options: [], range: range)
+    func storeBarcodeMetadata(barcodeType: String, barcodeContent: String) {
+        var barcode: Barcode
         
-        var barcodeContent: [BarcodeContent] = []
-        
-        for match in matches {
-            switch match.resultType {
-            case .link:
-                guard let url = match.url else { continue }
-                if url.absoluteString.hasPrefix("mailto:") {
-                    let email = url.absoluteString.replacingOccurrences(of: "mailto:", with: "")
-                    let content = BarcodeContent.email(email)
-                    barcodeContent.append(content)
-                } else if url.absoluteString.contains("@") {
-                    let email = url.absoluteString
-                    let content = BarcodeContent.email(email)
-                    barcodeContent.append(content)
-                } else {
-                    let content = BarcodeContent.url(url.absoluteString)
-                    barcodeContent.append(content)
-                }
-            case .date:
-                guard let date = match.date else { continue }
-                guard let timeZone = match.timeZone else { continue }
-                let duration = match.duration
-                let dateString = "Date: \(date), TimeZone: \(timeZone), Duration: \(duration)"
-                let content = BarcodeContent.date(dateString)
-                barcodeContent.append(content)
-            case .phoneNumber:
-                guard let phoneNumber = match.phoneNumber else { continue }
-                let content = BarcodeContent.phoneNumber(phoneNumber)
-                barcodeContent.append(content)
-            default:
-                print(match)
-            }
+        if barcodeType.lowercased().contains("qr") {
+            barcode = parseQrCodeContent(barcodeType: barcodeType, barcodeContent: barcodeContent)
+        } else if barcodeType.lowercased().contains("code") {
+            barcode = parseBarcodeContent(barcodeType: barcodeType, barcodeContent: barcodeContent)
+        } else {
+            barcode = parseIvalidBarcodeTypeContent(barcodeType: barcodeType, barcodeContent: barcodeContent)
         }
         
-        return barcodeContent
+        barcodes.append(barcode)
+    }
+    
+    func parseQrCodeContent(barcodeType: String, barcodeContent: String) -> Barcode {
+        var barcode: Barcode
+        
+        switch barcodeContent.components(separatedBy: ":")[0].lowercased() {
+        case "http", "https":
+            if validator.validateUrl(urlString: barcodeContent) {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.url(barcodeContent))
+            } else {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.url(barcodeContent), error: BarcodeError.invalidUrl)
+            }
+        case "mailto":
+            let email = preprocessor.processEmailString(emailString: barcodeContent)
+            if validator.validateEmail(emailString: email) {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.email(barcodeContent))
+            } else {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.email(barcodeContent), error: BarcodeError.invalidEmail)
+            }
+        case "tel":
+            let phoneNumber = preprocessor.processPhoneNumberString(phoneNumberString: barcodeContent)
+            if validator.validatePhoneNumber(phoneNumberString: phoneNumber) {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.phoneNumber(barcodeContent))
+            } else {
+                barcode = Barcode(type: barcodeType, data: BarcodeData.phoneNumber(barcodeContent), error: BarcodeError.invalidPhoneNumber)
+            }
+        default:
+            barcode = Barcode(type: barcodeType, data: BarcodeData.rawData(barcodeContent))
+        }
+        
+        return barcode
+    }
+    
+    func parseBarcodeContent(barcodeType: String, barcodeContent: String) -> Barcode {
+        return Barcode(type: barcodeType, data: BarcodeData.linearCode(barcodeContent))
+    }
+    
+    func parseIvalidBarcodeTypeContent(barcodeType: String, barcodeContent: String) -> Barcode {
+        return Barcode(type: barcodeType, data: BarcodeData.undefinedTypeData(barcodeContent), error: BarcodeError.undefinedBarcodeType)
+    }
+}
+
+struct BarcodeContentPreprocessor {
+    func processEmailString(emailString: String) -> String {
+        let email = emailString.replacingOccurrences(of: "mailto:", with: "")
+        return email
+    }
+    
+    func processPhoneNumberString(phoneNumberString: String) -> String {
+        let phoneNumber = phoneNumberString.replacingOccurrences(of: "tel:", with: "")
+        let phoneNumberFiltered = phoneNumber.replacingOccurrences(of: "[() -]",
+                                                                   with: "",
+                                                                   options: .regularExpression)
+        return phoneNumberFiltered
+    }
+}
+
+struct BarcodeContentValidator {
+    func validateUrl(urlString: String) -> Bool {
+        let urlFormat = "((https|http)://)((\\w|-)+)(([.]|[/])((\\w|-)+))+"
+        let urlPredicate = NSPredicate(format: "SELF MATCHES %@", urlFormat)
+        return urlPredicate.evaluate(with: urlString)
+    }
+    
+    func validateEmail(emailString: String) -> Bool {
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: emailString)
+    }
+    
+    func validatePhoneNumber(phoneNumberString: String) -> Bool {
+        let phoneFormat = "^[0-9+]{0,1}+[0-9]{5,16}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneFormat)
+        return phonePredicate.evaluate(with: phoneNumberString)
     }
 }
