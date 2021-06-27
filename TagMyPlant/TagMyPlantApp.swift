@@ -11,7 +11,7 @@ import SwiftUI
 struct TagMyPlantApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BarcodeScannerView()
         }
     }
 }
