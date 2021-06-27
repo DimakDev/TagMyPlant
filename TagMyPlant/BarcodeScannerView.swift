@@ -36,9 +36,7 @@ struct BarcodeScannerListView: View {
     
     var body: some View {
         List(controller.barcodes, id: \.id) { barcode in
-            if !barcode.content.isEmpty {
-                Text(barcode.content[0].getType())
-            }
+            Text("Data is \(barcode.data.get())")
         }
     }
 }
@@ -54,7 +52,7 @@ struct BarcodeScannerCameraView: View {
                 scanInterval: .constant(5.0)
             ){
                 self.controller.storeBarcodeMetadata(barcodeType: $0.type.rawValue,
-                                                     barcodeContentString: $0.value)
+                                                     barcodeContent: $0.value)
                 print("BarCodeType =",$0.type.rawValue, "Value =",$0.value)
             }
             
