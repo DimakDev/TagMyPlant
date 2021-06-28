@@ -41,7 +41,7 @@ final class BarcodeScannerController: ObservableObject {
                                   error: BarcodeError.invalidUrl)
             }
         case "mailto":
-            let email = preprocessor.processEmail(emailString: content)
+            let email = preprocessor.removeEmailPrefix(email: content)
             if validator.validateEmail(email: email) {
                 barcode = Barcode(type: type, data: BarcodeData.email(content))
             } else {
@@ -50,9 +50,10 @@ final class BarcodeScannerController: ObservableObject {
                                   error: BarcodeError.invalidEmail)
             }
         case "tel":
-            let phoneNumber = preprocessor.processPhoneNumber(phoneNumber: content)
+            let phoneNumber = preprocessor.removePhoneNumberPrefix(phoneNumber: content)
             if validator.validatePhoneNumber(phoneNumber: phoneNumber) {
-                barcode = Barcode(type: type, data: BarcodeData.phoneNumber(content))
+                barcode = Barcode(type: type,
+                                  data: BarcodeData.phoneNumber(content))
             } else {
                 barcode = Barcode(type: type,
                                   data: BarcodeData.phoneNumber(content),
@@ -77,16 +78,14 @@ final class BarcodeScannerController: ObservableObject {
 }
 
 struct BarcodeContentPreprocessor {
-    func processEmail(emailString: String) -> String {
-        let email = emailString.replacingOccurrences(of: "mailto:", with: "")
+    func removeEmailPrefix(email: String) -> String {
+        let email = email.replacingOccurrences(of: "mailto:", with: "")
         return email
     }
     
-    func processPhoneNumber(phoneNumber: String) -> String {
+    func removePhoneNumberPrefix(phoneNumber: String) -> String {
         let phoneNumber = phoneNumber.replacingOccurrences(of: "tel:", with: "")
-        let phoneNumberFiltered = phoneNumber.replacingOccurrences(
-            of: "[() -]", with: "", options: .regularExpression)
-        return phoneNumberFiltered
+        return phoneNumber
     }
 }
 
@@ -104,7 +103,7 @@ struct BarcodeContentValidator {
     }
     
     func validatePhoneNumber(phoneNumber: String) -> Bool {
-        let phoneFormat = "^[0-9+]{0,1}+[0-9]{5,16}$"
+        let phoneFormat = #"^\(?\d{3}\)?[ -]?\d{3}[ -]?\d{4}$"#
         let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneFormat)
         return phonePredicate.evaluate(with: phoneNumber)
     }
