@@ -12,12 +12,35 @@ import AVFoundation
 struct BarcodeScannerView: View {
     
     @StateObject private var controller = BarcodeScannerController()
+    @State private var showingClearAllDataAlert = false
     
     var body: some View {
         ZStack {
             NavigationView{
                 BarcodeScannerListView(controller: controller)
                     .navigationTitle("Scan results")
+                    .navigationBarItems(trailing: Button("Clear all") {
+                        showingClearAllDataAlert.toggle()
+                    }
+                    .font(.headline)
+                    .alert(isPresented: $showingClearAllDataAlert) {
+                        if controller.barcodes.isEmpty {
+                            return Alert(
+                                title: Text("There is no data stored"),
+                                dismissButton: .default(Text("Got it"))
+                            )
+                        } else {
+                            return Alert(
+                                title: Text("Are you sure you want to delete all data?"),
+                                message: Text("There is no undo"),
+                                primaryButton: .destructive(Text("Clear all")) {
+                                    controller.removeAllBarcodes()
+                                },
+                                secondaryButton: .cancel()
+                            )
+                        }
+                    }
+                    )
             }
             BarcodeScannerCameraView(controller: controller)
         }
@@ -34,47 +57,49 @@ struct BarcodeScannerListView: View {
     private let stackHighSpacing: CGFloat = 20
     
     var body: some View {
-        List(controller.barcodes, id: \.id) { barcode in
-            HStack(alignment: .top, spacing: stackHighSpacing) {
-                VStack(alignment: .leading, spacing: stackLowSpacing) {
-                    HStack(spacing: stackLowSpacing){
-                        Image(systemName: barcode.data.getImageName())
-                        Text("Type")
-                    }
-                    .font(.caption)
-                    .opacity(captionOpacity)
-                    Text(barcode.type)
-                }
-                VStack(alignment: .leading, spacing: stackMiddleSpacing) {
+        List {
+            ForEach(controller.barcodes, id: \.id) { barcode in
+                HStack(alignment: .top, spacing: stackHighSpacing) {
                     VStack(alignment: .leading, spacing: stackLowSpacing) {
-                        Text("Content")
-                            .font(.caption)
-                            .opacity(captionOpacity)
-                        Text(barcode.data.getContent())
-                    }
-                    if let error = barcode.error?.rawValue {
-                        VStack(alignment: .leading, spacing: stackLowSpacing) {
-                            Text("Error: \(error)")
+                        HStack(spacing: stackLowSpacing){
+                            Image(systemName: barcode.data.getImageName())
+                            Text("Type")
                         }
-                        .background(Color.secondary)
-                    } else if let description = barcode.data.getUrlDescription() {
-//                        url want take whitespaces in string
-                        if let url = URL(string: barcode.data.getContent()) {
-                            Link(description, destination: url)
-                                .font(.headline)
-                                .foregroundColor(.accentColor)
+                        .font(.caption)
+                        .opacity(captionOpacity)
+                        Text(barcode.type)
+                    }
+                    VStack(alignment: .leading, spacing: stackMiddleSpacing) {
+                        VStack(alignment: .leading, spacing: stackLowSpacing) {
+                            Text("Content")
+                                .font(.caption)
+                                .opacity(captionOpacity)
+                            Text(barcode.data.getContent())
+                        }
+                        if let error = barcode.error?.rawValue {
+                            VStack(alignment: .leading, spacing: stackLowSpacing) {
+                                Text("Error: \(error)")
+                            }
+                            .background(Color.secondary)
+                        } else if let description = barcode.data.getUrlDescription() {
+                            //                        url want take whitespaces in string
+                            if let url = URL(string: barcode.data.getContent()) {
+                                Link(description, destination: url)
+                                    .font(.headline)
+                                    .foregroundColor(.accentColor)
+                            }
                         }
                     }
                 }
-            }
+            }.onDelete(perform: controller.removeBarcode)
         }
     }
 }
 
 struct BarcodeScannerCameraView: View {
     
-    @State private var isPresentingCameraView = false
     @ObservedObject var controller: BarcodeScannerController
+    @State private var isPresentingCameraView = false
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -90,7 +115,7 @@ struct BarcodeScannerCameraView: View {
                     }
                 }
                 .sheet(isPresented: $isPresentingCameraView) {
-                        scannerView
+                    scannerView
                 }
                 .buttonStyle(PrimaryButtonStyle())
             }
@@ -126,6 +151,6 @@ struct PrimaryButtonStyle: ButtonStyle {
 struct BarcodeScannerView_Previews: PreviewProvider {
     static var previews: some View {
         BarcodeScannerView()
-//        BarcodeScannerCameraView(controller: BarcodeScannerController())
+        //        BarcodeScannerCameraView(controller: BarcodeScannerController())
     }
 }
