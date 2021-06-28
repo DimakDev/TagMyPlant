@@ -22,7 +22,7 @@ enum BarcodeData {
     case linearCode(String)
     case undefinedTypeData(String)
     
-    func get() -> String {
+    func getContent() -> String {
         switch self {
         case .url(let url):
             return url
@@ -36,6 +36,36 @@ enum BarcodeData {
             return linearCode
         case .undefinedTypeData(let undefinedTypeData):
             return undefinedTypeData
+        }
+    }
+    
+    func getUrlDescription() -> String? {
+        switch self {
+        case .url:
+            return "Open the URL"
+        case .email:
+            return "Open the Email"
+        case .phoneNumber:
+            return "Call the number"
+        case .rawData, .linearCode, .undefinedTypeData:
+            return nil
+        }
+    }
+    
+    func getImageName() -> String {
+        switch self {
+        case .url:
+            return "link"
+        case .email:
+            return "envelope"
+        case .phoneNumber:
+            return "phone"
+        case .rawData:
+            return "doc.text"
+        case .linearCode:
+            return "doc.text"
+        case .undefinedTypeData:
+            return "doc.text"
         }
     }
 }
