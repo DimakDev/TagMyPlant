@@ -12,7 +12,6 @@ import AVFoundation
 struct BarcodeScannerView: View {
     
     @StateObject private var controller = BarcodeScannerController()
-    @State private var isPresentingCameraView = false
     
     var body: some View {
         ZStack {
@@ -20,26 +19,7 @@ struct BarcodeScannerView: View {
                 BarcodeScannerListView(controller: controller)
                     .navigationTitle("Scan results")
             }
-            VStack(alignment: .trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        self.isPresentingCameraView.toggle()
-                    }) {
-                        HStack {
-                            Image(systemName: "viewfinder")
-                            Text("Start scanning")
-                        }
-                    }
-                    .sheet(isPresented: $isPresentingCameraView) {
-                        BarcodeScannerCameraView(controller: controller)
-                    }
-                    .buttonStyle(PrimaryButtonStyle())
-                }
-            }
-            .padding(.all, 20.0)
-            
+            BarcodeScannerCameraView(controller: controller)
         }
     }
 }
@@ -48,27 +28,32 @@ struct BarcodeScannerListView: View {
     
     @ObservedObject var controller: BarcodeScannerController
     
+    private let captionOpacity: Double = 0.8
+    private let stackLowSpacing: CGFloat = 5
+    private let stackMiddleSpacing: CGFloat = 10
+    private let stackHighSpacing: CGFloat = 20
+    
     var body: some View {
         List(controller.barcodes, id: \.id) { barcode in
-            HStack(alignment: .top, spacing: 20) {
-                VStack(alignment: .leading, spacing: 5) {
-                    HStack(spacing: 5){
+            HStack(alignment: .top, spacing: stackHighSpacing) {
+                VStack(alignment: .leading, spacing: stackLowSpacing) {
+                    HStack(spacing: stackLowSpacing){
                         Image(systemName: barcode.data.getImageName())
                         Text("Type")
                     }
                     .font(.caption)
-                    .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                    .opacity(captionOpacity)
                     Text(barcode.type)
                 }
-                VStack(alignment: .leading, spacing: 10) {
-                    VStack(alignment: .leading, spacing: 5) {
+                VStack(alignment: .leading, spacing: stackMiddleSpacing) {
+                    VStack(alignment: .leading, spacing: stackLowSpacing) {
                         Text("Content")
                             .font(.caption)
-                            .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                            .opacity(captionOpacity)
                         Text(barcode.data.getContent())
                     }
                     if let error = barcode.error?.rawValue {
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .leading, spacing: stackLowSpacing) {
                             Text("Error: \(error)")
                         }
                         .background(Color.secondary)
@@ -88,15 +73,38 @@ struct BarcodeScannerListView: View {
 
 struct BarcodeScannerCameraView: View {
     
+    @State private var isPresentingCameraView = false
     @ObservedObject var controller: BarcodeScannerController
     
     var body: some View {
+        VStack(alignment: .trailing) {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: {
+                    isPresentingCameraView.toggle()
+                }) {
+                    HStack {
+                        Image(systemName: "viewfinder")
+                        Text("Start scanning")
+                    }
+                }
+                .sheet(isPresented: $isPresentingCameraView) {
+                        scannerView
+                }
+                .buttonStyle(PrimaryButtonStyle())
+            }
+        }
+        .padding(.all, 20.0)
+    }
+    
+    var scannerView: some View {
         VStack{
             CBScanner(
                 supportBarcode: .constant([.qr, .code39, .code128]),
                 scanInterval: .constant(5.0)
             ){
-                self.controller.storeBarcodeMetadata(type: $0.type.rawValue, content: $0.value)
+                controller.storeBarcodeMetadata(type: $0.type.rawValue, content: $0.value)
                 print("BarCodeType =",$0.type.rawValue.utf8, "Value =",$0.value.utf8)
             }
         }
@@ -118,7 +126,6 @@ struct PrimaryButtonStyle: ButtonStyle {
 struct BarcodeScannerView_Previews: PreviewProvider {
     static var previews: some View {
         BarcodeScannerView()
-//        BarcodeScannerListView(controller: BarcodeScannerController())
 //        BarcodeScannerCameraView(controller: BarcodeScannerController())
     }
 }
