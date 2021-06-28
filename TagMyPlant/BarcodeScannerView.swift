@@ -92,7 +92,7 @@ struct BarcodeScannerListView: View {
                     }
                 }
             }.onDelete(perform: controller.removeBarcode)
-        }
+        }.animation(.spring())
     }
 }
 
@@ -100,6 +100,7 @@ struct BarcodeScannerCameraView: View {
     
     @ObservedObject var controller: BarcodeScannerController
     @State private var isPresentingCameraView = false
+    @State private var torchIsOn = false
     
     var body: some View {
         VStack(alignment: .trailing) {
@@ -114,24 +115,46 @@ struct BarcodeScannerCameraView: View {
                         Text("Start scanning")
                     }
                 }
-                .sheet(isPresented: $isPresentingCameraView) {
+                .sheet(isPresented: $isPresentingCameraView, onDismiss: { torchIsOn = false }) {
                     scannerView
                 }
                 .buttonStyle(PrimaryButtonStyle())
             }
         }
-        .padding(.all, 20.0)
+        .padding(20)
     }
     
     var scannerView: some View {
-        VStack{
+        ZStack{
             CBScanner(
                 supportBarcode: .constant([.qr, .code39, .code128]),
+                torchLightIsOn: $torchIsOn,
                 scanInterval: .constant(5.0)
             ){
                 controller.storeBarcodeMetadata(type: $0.type.rawValue, content: $0.value)
-                print("BarCodeType =",$0.type.rawValue.utf8, "Value =",$0.value.utf8)
+                print("BarCodeType =", $0.type.rawValue.utf8, "Value =",$0.value.utf8)
             }
+            onDraw: {
+                let lineWidth = 2
+                let lineColor = UIColor(Color.accentColor)
+                let fillColor = UIColor(Color.accentColor).withAlphaComponent(0.4)
+                
+                $0.draw(lineWidth: CGFloat(lineWidth), lineColor: lineColor, fillColor: fillColor)
+            }
+            Spacer()
+            VStack {
+                Spacer()
+                HStack {
+                    Button(action: {
+                        torchIsOn.toggle()
+                    }) {
+                        Image(systemName: torchIsOn ? "flashlight.on.fill" : "flashlight.off.fill").imageScale(.large)
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+                    Spacer()
+                }
+            }
+            .padding(20)
         }
     }
 }

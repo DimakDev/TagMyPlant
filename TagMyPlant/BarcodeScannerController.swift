@@ -63,8 +63,8 @@ final class BarcodeScannerController: ObservableObject {
         barcodes.removeAll()
     }
     
-    func removeBarcode(at: IndexSet) {
-        barcodes.remove(atOffsets: at)
+    func removeBarcode(offsets: IndexSet) {
+        barcodes.remove(atOffsets: offsets)
     }
 }
 
