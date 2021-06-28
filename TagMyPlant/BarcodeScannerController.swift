@@ -15,55 +15,40 @@ final class BarcodeScannerController: ObservableObject {
     private var preprocessor = BarcodeContentPreprocessor()
     
     func storeBarcodeMetadata(type: String, content: String) {
-        var barcode: Barcode
-        
         if type.lowercased().contains("qr") {
-            barcode = parseQrCodeContent(type: type, content: content)
+            barcodes.append(parseQrCodeContent(type: type, content: content))
         } else if type.lowercased().contains("code") {
-            barcode = parseBarcodeContent(type: type, content: content)
+            barcodes.append(parseBarcodeContent(type: type, content: content))
         } else {
-            barcode = parseUnknownTypeContent(type: type, content: content)
+            barcodes.append(parseUnknownTypeContent(type: type, content: content))
         }
-        
-        barcodes.append(barcode)
     }
     
     func parseQrCodeContent(type: String, content: String) -> Barcode {
-        var barcode: Barcode
-        
         switch content.components(separatedBy: ":")[0].lowercased() {
         case "http", "https":
             if validator.validateUrl(url: content) {
-                barcode = Barcode(type: type, data: BarcodeData.url(content))
+                return Barcode(type: type, data: BarcodeData.url(content))
             } else {
-                barcode = Barcode(type: type,
-                                  data: BarcodeData.url(content),
-                                  error: BarcodeError.invalidUrl)
+                return Barcode(type: type, data: BarcodeData.url(content), error: BarcodeError.invalidUrl)
             }
         case "mailto":
             let email = preprocessor.removeEmailPrefix(email: content)
             if validator.validateEmail(email: email) {
-                barcode = Barcode(type: type, data: BarcodeData.email(content))
+                return Barcode(type: type, data: BarcodeData.email(content))
             } else {
-                barcode = Barcode(type: type,
-                                  data: BarcodeData.email(content),
-                                  error: BarcodeError.invalidEmail)
+                return Barcode(type: type, data: BarcodeData.email(content), error: BarcodeError.invalidEmail)
             }
         case "tel":
             let phoneNumber = preprocessor.removePhoneNumberPrefix(phoneNumber: content)
             if validator.validatePhoneNumber(phoneNumber: phoneNumber) {
-                barcode = Barcode(type: type,
-                                  data: BarcodeData.phoneNumber(content))
+                return Barcode(type: type, data: BarcodeData.phoneNumber(content))
             } else {
-                barcode = Barcode(type: type,
-                                  data: BarcodeData.phoneNumber(content),
-                                  error: BarcodeError.invalidPhoneNumber)
+                return Barcode(type: type, data: BarcodeData.phoneNumber(content), error: BarcodeError.invalidPhoneNumber)
             }
         default:
-            barcode = Barcode(type: type, data: BarcodeData.rawData(content))
+            return Barcode(type: type, data: BarcodeData.rawData(content))
         }
-        
-        return barcode
     }
     
     func parseBarcodeContent(type: String, content: String) -> Barcode {
@@ -71,21 +56,17 @@ final class BarcodeScannerController: ObservableObject {
     }
     
     func parseUnknownTypeContent(type: String, content: String) -> Barcode {
-        return Barcode(type: type,
-                       data: BarcodeData.undefinedTypeData(content),
-                       error: BarcodeError.unknownBarcodeType)
+        return Barcode(type: type, data: BarcodeData.undefinedTypeData(content), error: BarcodeError.unknownBarcodeType)
     }
 }
 
 struct BarcodeContentPreprocessor {
     func removeEmailPrefix(email: String) -> String {
-        let email = email.replacingOccurrences(of: "mailto:", with: "")
-        return email
+        return email.replacingOccurrences(of: "mailto:", with: "")
     }
     
     func removePhoneNumberPrefix(phoneNumber: String) -> String {
-        let phoneNumber = phoneNumber.replacingOccurrences(of: "tel:", with: "")
-        return phoneNumber
+        return phoneNumber.replacingOccurrences(of: "tel:", with: "")
     }
 }
 
