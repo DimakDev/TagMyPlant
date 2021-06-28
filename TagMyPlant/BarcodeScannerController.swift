@@ -58,6 +58,14 @@ final class BarcodeScannerController: ObservableObject {
     func parseUnknownTypeContent(type: String, content: String) -> Barcode {
         return Barcode(type: type, data: BarcodeData.undefinedTypeData(content), error: BarcodeError.unknownBarcodeType)
     }
+    
+    func removeAllBarcodes() {
+        barcodes.removeAll()
+    }
+    
+    func removeBarcode(at: IndexSet) {
+        barcodes.remove(atOffsets: at)
+    }
 }
 
 struct BarcodeContentPreprocessor {
