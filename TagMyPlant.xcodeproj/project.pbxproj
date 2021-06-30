@@ -7,24 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD10678B268AC23900BA39E7 /* CoredataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10678A268AC23900BA39E7 /* CoredataManager.swift */; };
+		CD106794268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */; };
+		CD106796268ACCBB00BA39E7 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */; };
 		CD233C592686E73D00016C6D /* TagMyPlantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD233C582686E73D00016C6D /* TagMyPlantApp.swift */; };
-		CD233C5B2686E73D00016C6D /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD233C5A2686E73D00016C6D /* BarcodeScannerView.swift */; };
+		CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD233C5A2686E73D00016C6D /* ContentView.swift */; };
 		CD233C5D2686E73E00016C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5C2686E73E00016C6D /* Assets.xcassets */; };
 		CD233C602686E73E00016C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */; };
 		CD233C692686E94800016C6D /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = CD233C682686E94800016C6D /* CarBode */; };
-		CD4CE2892687A75B00B0532C /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE2882687A75B00B0532C /* BarcodeScannerController.swift */; };
-		CD4CE28B2687A8A000B0532C /* Barcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE28A2687A8A000B0532C /* Barcode.swift */; };
+		CD32FE27268B5325006D6E10 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE26268B5325006D6E10 /* ListView.swift */; };
+		CD32FE29268B53FF006D6E10 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE28268B53FF006D6E10 /* Styles.swift */; };
+		CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE2A268B5435006D6E10 /* ScannerView.swift */; };
+		CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD10678A268AC23900BA39E7 /* CoredataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataManager.swift; sourceTree = "<group>"; };
+		CD106793268AC2E700BA39E7 /* BarcodeModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeModel.xcdatamodel; sourceTree = "<group>"; };
+		CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		CD233C552686E73D00016C6D /* TagMyPlant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagMyPlant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD233C582686E73D00016C6D /* TagMyPlantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMyPlantApp.swift; sourceTree = "<group>"; };
-		CD233C5A2686E73D00016C6D /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
+		CD233C5A2686E73D00016C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CD233C5C2686E73E00016C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD233C612686E73E00016C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD4CE2882687A75B00B0532C /* BarcodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
-		CD4CE28A2687A8A000B0532C /* Barcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barcode.swift; sourceTree = "<group>"; };
+		CD32FE26268B5325006D6E10 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		CD32FE28268B53FF006D6E10 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		CD32FE2A268B5435006D6E10 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +69,13 @@
 			isa = PBXGroup;
 			children = (
 				CD233C582686E73D00016C6D /* TagMyPlantApp.swift */,
-				CD233C5A2686E73D00016C6D /* BarcodeScannerView.swift */,
-				CD4CE2882687A75B00B0532C /* BarcodeScannerController.swift */,
-				CD4CE28A2687A8A000B0532C /* Barcode.swift */,
+				CDD7563E268B655B00805C77 /* BarcodeViewModel */,
+				CD32FE25268B5293006D6E10 /* BarcodeView */,
 				CD233C5C2686E73E00016C6D /* Assets.xcassets */,
 				CD233C612686E73E00016C6D /* Info.plist */,
 				CD233C5E2686E73E00016C6D /* Preview Content */,
+				CD10678A268AC23900BA39E7 /* CoredataManager.swift */,
+				CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */,
 			);
 			path = TagMyPlant;
 			sourceTree = "<group>";
@@ -75,6 +86,26 @@
 				CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CD32FE25268B5293006D6E10 /* BarcodeView */ = {
+			isa = PBXGroup;
+			children = (
+				CD233C5A2686E73D00016C6D /* ContentView.swift */,
+				CD32FE26268B5325006D6E10 /* ListView.swift */,
+				CD32FE2A268B5435006D6E10 /* ScannerView.swift */,
+				CD32FE28268B53FF006D6E10 /* Styles.swift */,
+			);
+			path = BarcodeView;
+			sourceTree = "<group>";
+		};
+		CDD7563E268B655B00805C77 /* BarcodeViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */,
+				CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */,
+			);
+			path = BarcodeViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,9 +183,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD233C5B2686E73D00016C6D /* BarcodeScannerView.swift in Sources */,
-				CD4CE28B2687A8A000B0532C /* Barcode.swift in Sources */,
-				CD4CE2892687A75B00B0532C /* BarcodeScannerController.swift in Sources */,
+				CD106796268ACCBB00BA39E7 /* ContentViewModel.swift in Sources */,
+				CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */,
+				CD32FE29268B53FF006D6E10 /* Styles.swift in Sources */,
+				CD106794268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld in Sources */,
+				CD32FE27268B5325006D6E10 /* ListView.swift in Sources */,
+				CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */,
+				CD10678B268AC23900BA39E7 /* CoredataManager.swift in Sources */,
+				CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */,
 				CD233C592686E73D00016C6D /* TagMyPlantApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +399,19 @@
 			productName = CarBode;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CD106793268AC2E700BA39E7 /* BarcodeModel.xcdatamodel */,
+			);
+			currentVersion = CD106793268AC2E700BA39E7 /* BarcodeModel.xcdatamodel */;
+			path = BarcodeModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CD233C4D2686E73D00016C6D /* Project object */;
 }
