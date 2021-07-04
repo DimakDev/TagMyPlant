@@ -10,46 +10,37 @@ import XCTest
 
 class TagMyPlantTests: XCTestCase {
     var contentViewModel: ContentViewModel!
+    var mockBarcodes: MockBarcodes!
     
     override func setUpWithError() throws {
         contentViewModel = ContentViewModel()
+        mockBarcodes = MockBarcodes()
+    }
+    
+    override func setUp() {
+        for barcode in mockBarcodes.content {
+            contentViewModel.barcodeType = barcode.type
+            contentViewModel.barcodeContent = barcode.content
+            
+            contentViewModel.saveBarcode()
+        }
     }
     
     func testSaveBarcode() throws {
-        contentViewModel.barcodeType = "org.iso.Code39"
-        contentViewModel.barcodeContent = "gBx-19-2043"
-        
-        contentViewModel.saveBarcode()
-        
-        contentViewModel.barcodeType = "org.iso.Code39"
-        contentViewModel.barcodeContent = "gBx-19-2042"
-        
-        contentViewModel.saveBarcode()
-        
-        contentViewModel.barcodeType = "org.iso.Code39"
-        contentViewModel.barcodeContent = "gBx-19-2041"
-        
-        contentViewModel.saveBarcode()
         contentViewModel.getAllBarcodes()
         
-        XCTAssertEqual(contentViewModel.barcodes.count, 3)
-        
-        guard let barcode = contentViewModel.barcodes.last else {
-            return
+        XCTAssertEqual(contentViewModel.barcodes.count, mockBarcodes.content.count)
+    }
+    
+    func testDeleteBarcode() throws {
+        contentViewModel.getAllBarcodes()
+
+        for barcode in contentViewModel.barcodes {
+            contentViewModel.deleteBarcode(barcode)
         }
-        
-        contentViewModel.deleteBarcode(barcode)
+
         contentViewModel.getAllBarcodes()
-        
-        guard let barcode = contentViewModel.barcodes.last else {
-            return
-        }
-        
-        contentViewModel.deleteBarcode(barcode)
-        contentViewModel.getAllBarcodes()
-        
-        contentViewModel.getAllBarcodes()
-        
-        XCTAssertEqual(contentViewModel.barcodes.count, 1)
+
+        XCTAssertEqual(contentViewModel.barcodes.count, 0)
     }
 }
