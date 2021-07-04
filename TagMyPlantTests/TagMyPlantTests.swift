@@ -6,27 +6,50 @@
 //
 
 import XCTest
+@testable import TagMyPlant
 
 class TagMyPlantTests: XCTestCase {
-
+    var contentViewModel: ContentViewModel!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        contentViewModel = ContentViewModel()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    
+    func testSaveBarcode() throws {
+        contentViewModel.barcodeType = "org.iso.Code39"
+        contentViewModel.barcodeContent = "gBx-19-2043"
+        
+        contentViewModel.saveBarcode()
+        
+        contentViewModel.barcodeType = "org.iso.Code39"
+        contentViewModel.barcodeContent = "gBx-19-2042"
+        
+        contentViewModel.saveBarcode()
+        
+        contentViewModel.barcodeType = "org.iso.Code39"
+        contentViewModel.barcodeContent = "gBx-19-2041"
+        
+        contentViewModel.saveBarcode()
+        contentViewModel.getAllBarcodes()
+        
+        XCTAssertEqual(contentViewModel.barcodes.count, 3)
+        
+        guard let barcode = contentViewModel.barcodes.last else {
+            return
         }
+        
+        contentViewModel.deleteBarcode(barcode)
+        contentViewModel.getAllBarcodes()
+        
+        guard let barcode = contentViewModel.barcodes.last else {
+            return
+        }
+        
+        contentViewModel.deleteBarcode(barcode)
+        contentViewModel.getAllBarcodes()
+        
+        contentViewModel.getAllBarcodes()
+        
+        XCTAssertEqual(contentViewModel.barcodes.count, 1)
     }
-
 }
