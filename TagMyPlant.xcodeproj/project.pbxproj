@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CD10678B268AC23900BA39E7 /* CoredataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10678A268AC23900BA39E7 /* CoredataManager.swift */; };
+		CD10678B268AC23900BA39E7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD10678A268AC23900BA39E7 /* CoreDataManager.swift */; };
 		CD106794268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */; };
 		CD106796268ACCBB00BA39E7 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */; };
 		CD233C592686E73D00016C6D /* TagMyPlantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD233C582686E73D00016C6D /* TagMyPlantApp.swift */; };
@@ -17,11 +17,22 @@
 		CD233C692686E94800016C6D /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = CD233C682686E94800016C6D /* CarBode */; };
 		CD32FE27268B5325006D6E10 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE26268B5325006D6E10 /* ListView.swift */; };
 		CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE2A268B5435006D6E10 /* ScannerView.swift */; };
+		CD561714269111B3009B9DAA /* TagMyPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD561713269111B3009B9DAA /* TagMyPlantTests.swift */; };
 		CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD561716269111B3009B9DAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD233C4D2686E73D00016C6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD233C542686E73D00016C6D;
+			remoteInfo = TagMyPlant;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		CD10678A268AC23900BA39E7 /* CoredataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataManager.swift; sourceTree = "<group>"; };
+		CD10678A268AC23900BA39E7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CD106793268AC2E700BA39E7 /* BarcodeModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarcodeModel.xcdatamodel; sourceTree = "<group>"; };
 		CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		CD233C552686E73D00016C6D /* TagMyPlant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagMyPlant.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +43,9 @@
 		CD233C612686E73E00016C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD32FE26268B5325006D6E10 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		CD32FE2A268B5435006D6E10 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		CD561711269111B3009B9DAA /* TagMyPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TagMyPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD561713269111B3009B9DAA /* TagMyPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMyPlantTests.swift; sourceTree = "<group>"; };
+		CD561715269111B3009B9DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +58,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD56170E269111B3009B9DAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -51,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				CD233C572686E73D00016C6D /* TagMyPlant */,
+				CD561712269111B3009B9DAA /* TagMyPlantTests */,
 				CD233C562686E73D00016C6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				CD233C552686E73D00016C6D /* TagMyPlant.app */,
+				CD561711269111B3009B9DAA /* TagMyPlantTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,7 +95,7 @@
 				CD233C5C2686E73E00016C6D /* Assets.xcassets */,
 				CD233C612686E73E00016C6D /* Info.plist */,
 				CD233C5E2686E73E00016C6D /* Preview Content */,
-				CD10678A268AC23900BA39E7 /* CoredataManager.swift */,
+				CD10678A268AC23900BA39E7 /* CoreDataManager.swift */,
 				CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */,
 			);
 			path = TagMyPlant;
@@ -94,6 +117,15 @@
 				CD32FE2A268B5435006D6E10 /* ScannerView.swift */,
 			);
 			path = BarcodeView;
+			sourceTree = "<group>";
+		};
+		CD561712269111B3009B9DAA /* TagMyPlantTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD561713269111B3009B9DAA /* TagMyPlantTests.swift */,
+				CD561715269111B3009B9DAA /* Info.plist */,
+			);
+			path = TagMyPlantTests;
 			sourceTree = "<group>";
 		};
 		CDD7563E268B655B00805C77 /* BarcodeViewModel */ = {
@@ -128,6 +160,24 @@
 			productReference = CD233C552686E73D00016C6D /* TagMyPlant.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CD561710269111B3009B9DAA /* TagMyPlantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD56171A269111B3009B9DAA /* Build configuration list for PBXNativeTarget "TagMyPlantTests" */;
+			buildPhases = (
+				CD56170D269111B3009B9DAA /* Sources */,
+				CD56170E269111B3009B9DAA /* Frameworks */,
+				CD56170F269111B3009B9DAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD561717269111B3009B9DAA /* PBXTargetDependency */,
+			);
+			name = TagMyPlantTests;
+			productName = TagMyPlantTests;
+			productReference = CD561711269111B3009B9DAA /* TagMyPlantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -139,6 +189,10 @@
 				TargetAttributes = {
 					CD233C542686E73D00016C6D = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					CD561710269111B3009B9DAA = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = CD233C542686E73D00016C6D;
 					};
 				};
 			};
@@ -159,6 +213,7 @@
 			projectRoot = "";
 			targets = (
 				CD233C542686E73D00016C6D /* TagMyPlant */,
+				CD561710269111B3009B9DAA /* TagMyPlantTests */,
 			);
 		};
 /* End PBXProject section */
@@ -170,6 +225,13 @@
 			files = (
 				CD233C602686E73E00016C6D /* Preview Assets.xcassets in Resources */,
 				CD233C5D2686E73E00016C6D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD56170F269111B3009B9DAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,13 +247,29 @@
 				CD106794268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld in Sources */,
 				CD32FE27268B5325006D6E10 /* ListView.swift in Sources */,
 				CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */,
-				CD10678B268AC23900BA39E7 /* CoredataManager.swift in Sources */,
+				CD10678B268AC23900BA39E7 /* CoreDataManager.swift in Sources */,
 				CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */,
 				CD233C592686E73D00016C6D /* TagMyPlantApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CD56170D269111B3009B9DAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD561714269111B3009B9DAA /* TagMyPlantTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD561717269111B3009B9DAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD233C542686E73D00016C6D /* TagMyPlant */;
+			targetProxy = CD561716269111B3009B9DAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CD233C622686E73E00016C6D /* Debug */ = {
@@ -354,6 +432,46 @@
 			};
 			name = Release;
 		};
+		CD561718269111B3009B9DAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7B9PF3VFTB;
+				INFOPLIST_FILE = TagMyPlantTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = charisma.TagMyPlantTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TagMyPlant.app/TagMyPlant";
+			};
+			name = Debug;
+		};
+		CD561719269111B3009B9DAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7B9PF3VFTB;
+				INFOPLIST_FILE = TagMyPlantTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = charisma.TagMyPlantTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TagMyPlant.app/TagMyPlant";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -371,6 +489,15 @@
 			buildConfigurations = (
 				CD233C652686E73E00016C6D /* Debug */,
 				CD233C662686E73E00016C6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD56171A269111B3009B9DAA /* Build configuration list for PBXNativeTarget "TagMyPlantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD561718269111B3009B9DAA /* Debug */,
+				CD561719269111B3009B9DAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
