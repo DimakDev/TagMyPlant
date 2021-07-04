@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ListView: View {
     
-    @ObservedObject var barcodeViewModel: ContentViewModel
+    @ObservedObject var contentViewModel: ContentViewModel
     
     var body: some View {
         List {
-            ForEach(barcodeViewModel.barcodes, id: \.id) { barcode in
+            ForEach(contentViewModel.barcodes, id: \.id) { barcode in
                 VStack(alignment: .leading, spacing: 10) {
                     BarcodeContentView(barcode: barcode)
                     
@@ -30,11 +30,11 @@ struct ListView: View {
     func deleteBarcode(at offsets: IndexSet) {
         withAnimation {
             offsets.forEach { index in
-                let barcode = barcodeViewModel.barcodes[index]
-                barcodeViewModel.delete(barcode)
+                let barcode = contentViewModel.barcodes[index]
+                contentViewModel.deleteBarcode(barcode)
             }
             
-            barcodeViewModel.getAllBarcodes()
+            contentViewModel.getAllBarcodes()
         }
     }
 }

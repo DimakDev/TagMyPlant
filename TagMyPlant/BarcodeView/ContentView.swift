@@ -10,20 +10,20 @@ import CarBode
 
 struct ContentView: View {
     
-    @StateObject private var barcodeViewModel = ContentViewModel()
+    @StateObject private var contentViewModel = ContentViewModel()
     @State private var showClearAllDataAlert = false
     
     var body: some View {
         ZStack {
             NavigationView{
-                ListView(barcodeViewModel: barcodeViewModel)
+                ListView(contentViewModel: contentViewModel)
                     .navigationTitle("Scan results")
                     .navigationBarItems(trailing: Button("Clear all") {
                         showClearAllDataAlert.toggle()
                     }
                     .font(.callout)
                     .alert(isPresented: $showClearAllDataAlert) {
-                        if barcodeViewModel.barcodes.isEmpty {
+                        if contentViewModel.barcodes.isEmpty {
                             return dismissAlert
                         } else {
                             return deleteDataAlert
@@ -31,18 +31,18 @@ struct ContentView: View {
                     }
                     )
             }
-            BarcodeScannerView(barcodeViewModel: barcodeViewModel)
+            BarcodeScannerView(contentViewModel: contentViewModel)
         }.onAppear(perform: {
-            barcodeViewModel.getAllBarcodes()
+            contentViewModel.getAllBarcodes()
         })
     }
     
     func deleteAllBarcodes() {
         withAnimation {
-            barcodeViewModel.barcodes.forEach { barcode in
-                barcodeViewModel.delete(barcode)
+            contentViewModel.barcodes.forEach { barcode in
+                contentViewModel.deleteBarcode(barcode)
             }
-            barcodeViewModel.getAllBarcodes()
+            contentViewModel.getAllBarcodes()
         }
     }
     

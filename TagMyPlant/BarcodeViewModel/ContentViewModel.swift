@@ -18,15 +18,21 @@ class ContentViewModel: ObservableObject {
         barcodes = CoreDataManager.shared.getAllBarcodes().map(BarcodeViewModel.init)
     }
     
-    func delete(_ barcode: BarcodeViewModel) {
+    func deleteBarcode(_ barcode: BarcodeViewModel) {
         if let existingTask = CoreDataManager.shared.getBarcodeById(id: barcode.id) {
             CoreDataManager.shared.deleteBarcode(barcode: existingTask)
         }
     }
     
-    func save() {
+    func saveBarcode() {
         let barcode = Barcode(context: CoreDataManager.shared.viewContext)
-        
+        parseBarcodeMetadata(barcode: barcode)
+        CoreDataManager.shared.save()
+    }
+}
+
+extension ContentViewModel {
+    private func parseBarcodeMetadata(barcode: Barcode) {
         let components = barcodeContent.components(separatedBy: ":")
         
         if let prefix = components.first {
@@ -70,12 +76,8 @@ class ContentViewModel: ObservableObject {
             barcode.content = barcodeContent
             barcode.contentIcon = "doc.text"
         }
-    
-        CoreDataManager.shared.save()
     }
-}
-
-extension ContentViewModel {
+    
     private func validateUrl(url: String) -> Bool {
         let urlFormat = "((https|http)://)((\\w|-)+)(([.]|[/])((\\w|-)+))+"
         let urlPredicate = NSPredicate(format: "SELF MATCHES %@", urlFormat)

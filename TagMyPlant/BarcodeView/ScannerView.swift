@@ -10,7 +10,7 @@ import CarBode
 
 struct BarcodeScannerView: View {
     
-    @ObservedObject var barcodeViewModel: ContentViewModel
+    @ObservedObject var contentViewModel: ContentViewModel
     
     @State private var isPresentingCameraView = false
     @State private var showNotificationBanner = false
@@ -45,11 +45,11 @@ struct BarcodeScannerView: View {
                 torchLightIsOn: $torchIsOn,
                 scanInterval: .constant(5.0)
             ){
-                barcodeViewModel.barcodeType = $0.type.rawValue
-                barcodeViewModel.barcodeContent = $0.value
+                contentViewModel.barcodeType = $0.type.rawValue
+                contentViewModel.barcodeContent = $0.value
                 
-                barcodeViewModel.save()
-                barcodeViewModel.getAllBarcodes()
+                contentViewModel.saveBarcode()
+                contentViewModel.getAllBarcodes()
                 
                 showNotificationBanner = true
                 print("BarCodeType =", $0.type.rawValue, "Value =",$0.value)
