@@ -18,6 +18,7 @@
 		CD32FE27268B5325006D6E10 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE26268B5325006D6E10 /* ListView.swift */; };
 		CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE2A268B5435006D6E10 /* ScannerView.swift */; };
 		CD561714269111B3009B9DAA /* TagMyPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD561713269111B3009B9DAA /* TagMyPlantTests.swift */; };
+		CD650A23269210A900B37ED3 /* TagMyPlantTestsMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD650A22269210A900B37ED3 /* TagMyPlantTestsMockData.swift */; };
 		CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		CD561711269111B3009B9DAA /* TagMyPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TagMyPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD561713269111B3009B9DAA /* TagMyPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMyPlantTests.swift; sourceTree = "<group>"; };
 		CD561715269111B3009B9DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD650A22269210A900B37ED3 /* TagMyPlantTestsMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMyPlantTestsMockData.swift; sourceTree = "<group>"; };
 		CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 		CD561712269111B3009B9DAA /* TagMyPlantTests */ = {
 			isa = PBXGroup;
 			children = (
+				CD650A22269210A900B37ED3 /* TagMyPlantTestsMockData.swift */,
 				CD561713269111B3009B9DAA /* TagMyPlantTests.swift */,
 				CD561715269111B3009B9DAA /* Info.plist */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD650A23269210A900B37ED3 /* TagMyPlantTestsMockData.swift in Sources */,
 				CD561714269111B3009B9DAA /* TagMyPlantTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
