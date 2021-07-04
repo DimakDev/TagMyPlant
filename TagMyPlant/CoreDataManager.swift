@@ -1,5 +1,5 @@
 //
-//  CoredataManager.swift
+//  CoreDataManager.swift
 //  TagMyPlant
 //
 //  Created by Dmytro Kostiuk on 29.06.21.
@@ -8,10 +8,15 @@
 import Foundation
 import CoreData
 
+enum StorageType {
+    case inMemory, persistent
+}
+
 class CoreDataManager {
     let persistentContainer: NSPersistentContainer
-    static let shared = CoreDataManager()
     
+    static let shared = CoreDataManager(storageType: .inMemory)
+
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
@@ -48,8 +53,15 @@ class CoreDataManager {
         }
     }
     
-    private init() {
+    private init(storageType: StorageType) {
         persistentContainer = NSPersistentContainer(name: "BarcodeModel")
+        
+        if storageType == .inMemory {
+          let description = NSPersistentStoreDescription()
+          description.url = URL(fileURLWithPath: "/dev/null")
+          self.persistentContainer.persistentStoreDescriptions = [description]
+        }
+        
         persistentContainer.loadPersistentStores{ (description, error) in
             if let error = error {
                 fatalError("Unable to initialize Core Data Stack \(error)")
