@@ -1,0 +1,146 @@
+@startuml
+
+skinparam defaultFontSize 12
+
+package SQLite << Database >> #EEEEEE {
+    package Models << Folder >> #DDDDDD {
+        entity Barcode << Entity >> {
+            String content
+            String contentIcon
+            Date createdAt
+            String type
+            String? url
+            String? urlDescription
+        }
+    }
+}
+
+package ViewModels << Folder >> #DDDDDD {
+    enum StorageType << Enum >> {
+        inMemory
+        persistent
+    }
+
+    class CoreDataManager << Singelton >> {
+        + NSPersistentContainer persistentContainer
+        + CoreDataManager shared
+        + NSManagedObjectContext viewContext
+        + Barcode? getBarcodeById(id: NSManagedObjectID)
+        + [Barcode] getAllBarcodes()
+        + deleteBarcode(barcode: Barcode)
+        + save()
+        - init(storageType: StorageType)
+    }
+    
+    class ContentViewModel << ObservableObject >> {
+        __ Published __
+        + [BarcodeViewModel] barcodes
+        __
+        + String barcodeType
+        + String barcodeContent
+        + getAllBarcodes()
+        + deleteBarcode(_ barcode: BarcodeViewModel)
+        + saveBarcode()
+        __ Extension __
+        - parseBarcodeMetadata(barcode: Barcode)
+        - Bool validateUrl(url: String)
+        - Bool validateEmail(email: String)
+        - Bool validatePhoneNumber(phoneNumber: String)
+    }
+    
+    class BarcodeViewModel << (S, #FF7700) Struct >> {
+        + Barcode barcode
+        + NSManagedObjectID id
+        + String createdAt
+        + String type
+        + String content
+        + String contentIcon
+        + String urlDescription
+        + URL? url
+    }
+}
+
+package Views << Folder >> #DDDDDD {
+    class ContentView << (S, #FF7700) Struct >> {
+        __ StateObject __
+        - ContentViewModel contentViewModel
+        __ State __
+        - Bool showDeleteAllBarcodesAlert
+        __ View __
+        + some View body
+        __
+        - Alert deleteAllBarcodesDismissAlert
+        - Alert deleteAllBarcodesAlert
+        - deleteAllBarcodes()
+    }
+    
+    class ListView << (S, #FF7700) Struct >> {
+        __ ObservedObject __
+        + ContentViewModel contentViewModel
+        __ View __
+        + some View body
+        __
+        - deleteBarcode(at offsets: IndexSet)
+    }
+    
+    class BarcodeContentView << (S, #FF7700) Struct >> {
+        + BarcodeViewModel barcode
+        __ View __
+        + some View body
+    }
+    
+    class BarcodeMetadataView << (S, #FF7700) Struct >> {
+        + BarcodeViewModel barcode
+        __ View __
+        + some View body
+    }
+    
+    class BarcodeLinkView << (S, #FF7700) Struct >> {
+        + BarcodeViewModel barcode
+        __ View __
+        + some View body
+    }
+    
+    class BarcodeScannerView << (S, #FF7700) Struct >> {
+        __ ObservedObject __
+        + ContentViewModel contentViewModel
+        __ State __
+        - Bool isPresentingCameraView
+        - Bool showNotificationBanner
+        - Bool torchIsOn
+        __ View __
+        + some View body
+        - some View scannerView
+        - some View footerView
+    }
+    
+    interface ButtonStyle << (P, #BD2979) Protocol >>
+    interface LabelStyle << (P, #BD2979) Protocol >>
+    
+    class PrimaryButtonStyle << (S, #FF7700) Struct >>
+    class PrimaryLabelStyle << (S, #FF7700) Struct >>
+}
+
+ContentView .down.> BarcodeScannerView
+ContentView .down.> ListView
+
+ListView .down.> BarcodeContentView
+ListView .down.> BarcodeMetadataView
+ListView .down.> BarcodeLinkView
+
+PrimaryButtonStyle .down.|> ButtonStyle
+PrimaryLabelStyle .down.|> LabelStyle
+
+BarcodeScannerView .down.> PrimaryButtonStyle
+BarcodeScannerView .down.> PrimaryLabelStyle
+
+ContentViewModel -down-> BarcodeViewModel
+ContentViewModel .down.> CoreDataManager
+
+CoreDataManager -down-> StorageType
+
+ContentViewModel --down-> Barcode 
+CoreDataManager --down-> SQLite  
+
+ContentViewModel <-right- ContentView
+@enduml
