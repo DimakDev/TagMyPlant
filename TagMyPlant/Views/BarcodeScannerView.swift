@@ -38,7 +38,7 @@ struct BarcodeScannerView: View {
         .padding(20)
     }
     
-    var scannerView: some View {
+    private var scannerView: some View {
         ZStack{
             CBScanner(
                 supportBarcode: .constant([.qr, .code39, .code128]),
@@ -61,11 +61,11 @@ struct BarcodeScannerView: View {
                 
                 $0.draw(lineWidth: CGFloat(lineWidth), lineColor: lineColor, fillColor: fillColor)
             }
-            footer
+            footerView
         }
     }
     
-    var footer: some View {
+    private var footerView: some View {
         VStack {
             Spacer()
             HStack(alignment: .center) {

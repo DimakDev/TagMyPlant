@@ -16,7 +16,7 @@
 		CD233C602686E73E00016C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */; };
 		CD233C692686E94800016C6D /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = CD233C682686E94800016C6D /* CarBode */; };
 		CD32FE27268B5325006D6E10 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE26268B5325006D6E10 /* ListView.swift */; };
-		CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE2A268B5435006D6E10 /* ScannerView.swift */; };
+		CD32FE2B268B5435006D6E10 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32FE2A268B5435006D6E10 /* BarcodeScannerView.swift */; };
 		CD561714269111B3009B9DAA /* TagMyPlantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD561713269111B3009B9DAA /* TagMyPlantTests.swift */; };
 		CD650A23269210A900B37ED3 /* TagMyPlantTestsMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD650A22269210A900B37ED3 /* TagMyPlantTestsMockData.swift */; };
 		CDD75640268B65AD00805C77 /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */; };
@@ -43,7 +43,7 @@
 		CD233C5F2686E73E00016C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD233C612686E73E00016C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD32FE26268B5325006D6E10 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		CD32FE2A268B5435006D6E10 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		CD32FE2A268B5435006D6E10 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		CD561711269111B3009B9DAA /* TagMyPlantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TagMyPlantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD561713269111B3009B9DAA /* TagMyPlantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMyPlantTests.swift; sourceTree = "<group>"; };
 		CD561715269111B3009B9DAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,13 +92,12 @@
 			isa = PBXGroup;
 			children = (
 				CD233C582686E73D00016C6D /* TagMyPlantApp.swift */,
-				CDD7563E268B655B00805C77 /* BarcodeViewModel */,
-				CD32FE25268B5293006D6E10 /* BarcodeView */,
+				CDD7563E268B655B00805C77 /* ViewModels */,
+				CD32FE25268B5293006D6E10 /* Views */,
 				CD233C5C2686E73E00016C6D /* Assets.xcassets */,
 				CD233C612686E73E00016C6D /* Info.plist */,
+				CD9918DF269AF67B00E10315 /* Model */,
 				CD233C5E2686E73E00016C6D /* Preview Content */,
-				CD10678A268AC23900BA39E7 /* CoreDataManager.swift */,
-				CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */,
 			);
 			path = TagMyPlant;
 			sourceTree = "<group>";
@@ -111,14 +110,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		CD32FE25268B5293006D6E10 /* BarcodeView */ = {
+		CD32FE25268B5293006D6E10 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CD233C5A2686E73D00016C6D /* ContentView.swift */,
 				CD32FE26268B5325006D6E10 /* ListView.swift */,
-				CD32FE2A268B5435006D6E10 /* ScannerView.swift */,
+				CD32FE2A268B5435006D6E10 /* BarcodeScannerView.swift */,
 			);
-			path = BarcodeView;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CD561712269111B3009B9DAA /* TagMyPlantTests */ = {
@@ -131,13 +130,22 @@
 			path = TagMyPlantTests;
 			sourceTree = "<group>";
 		};
-		CDD7563E268B655B00805C77 /* BarcodeViewModel */ = {
+		CD9918DF269AF67B00E10315 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD106792268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CDD7563E268B655B00805C77 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CD10678A268AC23900BA39E7 /* CoreDataManager.swift */,
 				CD106795268ACCBB00BA39E7 /* ContentViewModel.swift */,
 				CDD7563F268B65AD00805C77 /* BarcodeViewModel.swift */,
 			);
-			path = BarcodeViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD106796268ACCBB00BA39E7 /* ContentViewModel.swift in Sources */,
-				CD32FE2B268B5435006D6E10 /* ScannerView.swift in Sources */,
+				CD32FE2B268B5435006D6E10 /* BarcodeScannerView.swift in Sources */,
 				CD106794268AC2E700BA39E7 /* BarcodeModel.xcdatamodeld in Sources */,
 				CD32FE27268B5325006D6E10 /* ListView.swift in Sources */,
 				CD233C5B2686E73D00016C6D /* ContentView.swift in Sources */,

@@ -27,7 +27,7 @@ struct ListView: View {
         }
     }
     
-    func deleteBarcode(at offsets: IndexSet) {
+    private func deleteBarcode(at offsets: IndexSet) {
         withAnimation {
             offsets.forEach { index in
                 let barcode = contentViewModel.barcodes[index]

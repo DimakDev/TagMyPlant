@@ -11,7 +11,7 @@ import CarBode
 struct ContentView: View {
     
     @StateObject private var contentViewModel = ContentViewModel()
-    @State private var showClearAllDataAlert = false
+    @State private var showDeleteAllBarcodesAlert = false
     
     var body: some View {
         ZStack {
@@ -19,14 +19,14 @@ struct ContentView: View {
                 ListView(contentViewModel: contentViewModel)
                     .navigationTitle("Scan results")
                     .navigationBarItems(trailing: Button("Clear all") {
-                        showClearAllDataAlert.toggle()
+                        showDeleteAllBarcodesAlert.toggle()
                     }
                     .font(.callout)
-                    .alert(isPresented: $showClearAllDataAlert) {
+                    .alert(isPresented: $showDeleteAllBarcodesAlert) {
                         if contentViewModel.barcodes.isEmpty {
-                            return dismissAlert
+                            return deleteAllBarcodesDismissAlert
                         } else {
-                            return deleteDataAlert
+                            return deleteAllBarcodesAlert
                         }
                     }
                     )
@@ -37,7 +37,7 @@ struct ContentView: View {
         })
     }
     
-    func deleteAllBarcodes() {
+    private func deleteAllBarcodes() {
         withAnimation {
             contentViewModel.barcodes.forEach { barcode in
                 contentViewModel.deleteBarcode(barcode)
@@ -46,14 +46,14 @@ struct ContentView: View {
         }
     }
     
-    var dismissAlert: Alert {
+    private var deleteAllBarcodesDismissAlert: Alert {
         Alert(
             title: Text("There is no data stored"),
             dismissButton: .default(Text("Got it"))
         )
     }
     
-    var deleteDataAlert: Alert {
+    private var deleteAllBarcodesAlert: Alert {
         Alert(
             title: Text("Are you sure you want to delete all data?"),
             message: Text("There is no undo"),
