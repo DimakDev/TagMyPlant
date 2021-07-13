@@ -23,7 +23,7 @@ package ViewModels << Folder >> #DDDDDD {
 
     class CoreDataManager << Singelton >> {
         + NSPersistentContainer persistentContainer
-        + CoreDataManager shared
+        +{static} CoreDataManager shared
         + NSManagedObjectContext viewContext
         + Barcode? getBarcodeById(id: NSManagedObjectID)
         + [Barcode] getAllBarcodes()
