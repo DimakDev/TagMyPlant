@@ -5,7 +5,7 @@
 
 One of the main objectives is to design user interactions scenarios. It is a kind of brainstorming where different ideas can find their places on a canvas. The list of requirements helps to find an appropriate layout design and provide a well-suited functionality.
 
-![Sketch: user interface and user experience design](images/ui_ux_sketch.png) 
+![Sketch: user interface and user experience design](Images/ui_ux_sketch.png) 
 
 As we see on the sketch above. There are two main views. 
 
