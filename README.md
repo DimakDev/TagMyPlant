@@ -3,4 +3,4 @@
   <h2>TagMyPlant</h2>
 </p>
 
-TagMyPlant is a Barcode scanner for iOS
+Project iAT Teleautomation TagMyPlant.
