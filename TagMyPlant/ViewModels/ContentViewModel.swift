@@ -51,7 +51,7 @@ extension ContentViewModel {
                 barcode.type = barcodeType
                 barcode.content = barcodeContent
                 barcode.contentIcon = "envelope"
-                if validateEmail(email: barcodeContent.replacingOccurrences(of: prefix, with: "")) {
+                if validateEmail(email: components[1]) {
                     barcode.url = barcodeContent
                     barcode.urlDescription = "Open the Email"
                 }
@@ -60,7 +60,7 @@ extension ContentViewModel {
                 barcode.type = barcodeType
                 barcode.content = barcodeContent
                 barcode.contentIcon = "phone"
-                if validatePhoneNumber(phoneNumber: barcodeContent.replacingOccurrences(of: prefix, with: "")) {
+                if validatePhoneNumber(phoneNumber: components[1]) {
                     barcode.url = barcodeContent
                     barcode.urlDescription = "Call the number"
                 }
@@ -91,8 +91,8 @@ extension ContentViewModel {
     }
     
     private func validatePhoneNumber(phoneNumber: String) -> Bool {
-        // replace all whitespaces with dashes to parse url
-        let phoneFormat = #"^\(?\d{3}\)?[ -]?\d{3}[ -]?\d{4}$"#
+        // matches (123) 456-7890 | 123-456-7890
+        let phoneFormat = #"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}"#
         let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneFormat)
         return phonePredicate.evaluate(with: phoneNumber)
     }
