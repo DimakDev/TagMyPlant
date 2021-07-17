@@ -91,7 +91,7 @@ struct BarcodeLinkView: View {
                 .font(.callout)
                 .foregroundColor(.accentColor)
         } else {
-            Text("Ivalid link")
+            Text("Invalid link")
                 .padding(5)
                 .font(.callout)
                 .background(Color.secondary)
