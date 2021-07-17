@@ -2,7 +2,7 @@
 
 There is a wide variety of tools on the market you can use to implement such a software product. The list was based on a personal preference and tools I have experience with.
 
-## Prototyping
+## Concept
 
 | Tool | Description |
 |:--|:--|
@@ -20,6 +20,7 @@ There is a wide variety of tools on the market you can use to implement such a s
 | [**CarBode**](https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI) | Barcode scanner framework |
 | [**iPhone SE2**](https://www.apple.com/iphone-se/) | Target device |
 | [**GitHub**](https://github.com) | Version control system |
+| [**Tower**](https://www.git-tower.com/mac) | GitHub client |
 | [**Mockaroo**](https://www.mockaroo.com) | Mock data generation for tests |
 | [**Barcode generator**](http://www.barcodez.net) | Barcode generation for tests |
 | [**QR Code generator**](https://qrexplore.com/generate/) | QR code generator for tests |

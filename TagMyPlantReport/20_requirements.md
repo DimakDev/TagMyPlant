@@ -1,6 +1,6 @@
 # Requirements
 
-To define the value and purpose of the product, we specified a list of features and requirements. This helped ultimately in the process of prototyping and development to transform a concept into a functional product. 
+To define the value and purpose of the product, a list of features and requirements was specified. This helped ultimately in the process of prototyping and development to transform a concept into a functional product. 
 
 The following list of features and requirements becomes a foundation for further development.
 
@@ -11,7 +11,7 @@ The following list of features and requirements becomes a foundation for further
 
 ## Functionality
 
-* **Continuously scanning:** multiple barcodes can be scanned in one session to simulate production environment requirements
-* **Support for multiple barcode types:** it can be specified internally in the code or externally by the user
-* **Torchlight:** the user can turn the torchlight on and off to scan a barcode in the dark
-* **Barcode information:** barcode information should be easily available to the user
+* **Continuously scanning:** multiple barcodes can be scanned in one session to simulate production environment requirements.
+* **Support for multiple barcode types:** it can be specified internally in the code or externally by the user.
+* **Torchlight:** the user can turn the torchlight on and off to scan a barcode in the dark.
+* **Barcode information:** barcode information should be easily available to the user.
