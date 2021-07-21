@@ -6,4 +6,4 @@ Using the online barcode generator tool, different barcode types can be generate
 
 The following images represent the application in production environment.
 
-![Application: production environment](images/production_environment.png)
+![Application: production environment](Images/production_environment.png)

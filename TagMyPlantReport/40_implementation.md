@@ -12,6 +12,6 @@ The barcode scanner uses the camera view to capture and scan the barcodes. It is
 
 `ViewModels` package keeps track of its state. It cares about how the data is created, updated and deleted. The `ObservableObject` uses a static `ViewModels.CoreDataManager` object. The object sends requests to access the data from a SQLite database. The database has only one data model for the entity `Barcode`.
 
-![Simulator: navigation and camera views](images/simulator_environment.png)
+![Simulator: navigation and camera views](Images/simulator_environment.png)
 
 The application works in horizontal and vertical orientation. The dark theme is optional, it can be changed in user settings. The app should work on all iOS devices with the newest iOS (v14+).
