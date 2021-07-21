@@ -1,9 +1,9 @@
 # Validation
 
-The target device is used to validate the functionality of the application in the production environment. In a wireless debug mode, the target device can send the information to the IDE console, which can be validated in real time.
+The target device iPhone SE2 is used to validate the functionality of the application in the production environment. In a wireless mode, the smartphone can send debug information to the IDE console. This information can be used to identify bugs and errors.
 
-For the validation purpose, different types of barcodes can be generated using barcode generator tools.
+Using the online barcode generator tool, different barcode types can be generated and used by the validation process. Using the smartphone, the UI functionality can be also easily validated.
 
-The following images represent some functionality of the application in production environment.
+The following images represent the application in production environment.
 
 ![Application: production environment](images/production_environment.png)

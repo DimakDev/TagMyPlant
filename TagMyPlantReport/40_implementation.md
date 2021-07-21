@@ -1,6 +1,6 @@
 # Implementation
 
-Project environment setup is an essential part of the development process. The Xcode IDE offers good functionality, GitHub integration and code management tools. 
+Project environment setup is an essential part of the development process. The Xcode IDE offers good functionality, GitHub integration and code management tools.
 
 According to the MVVM pattern the architecture of the application was implemented using three packages namely `Views`, `ViewModels`, `Models`.
 
@@ -12,6 +12,6 @@ The barcode scanner uses the camera view to capture and scan the barcodes. It is
 
 `ViewModels` package keeps track of its state. It cares about how the data is created, updated and deleted. The `ObservableObject` uses a static `ViewModels.CoreDataManager` object. The object sends requests to access the data from a SQLite database. The database has only one data model for the entity `Barcode`.
 
-![Simulator: navigation and camera views](images/simulator.png)
+![Simulator: navigation and camera views](images/simulator_environment.png)
 
-The application works in horizontal and vertical orientation. The dark theme is optional, it depends on user settings. The app should work on all iOS devices with the newest iOS (v14).
+The application works in horizontal and vertical orientation. The dark theme is optional, it can be changed in user settings. The app should work on all iOS devices with the newest iOS (v14+).

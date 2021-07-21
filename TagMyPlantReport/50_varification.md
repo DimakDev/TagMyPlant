@@ -4,9 +4,9 @@ The verification process aims to check the code with the intent of finding failu
 
 ![Mockaroo mock data example](Images/mock_data_example.png)
 
-The mock data can be generated using Mockaroo service. That data is used to simulate the barcode information. Test setup gets the data via HTTP `GET` request from the Mockaroo server.
+The mock data can be generated using Mockaroo service. That data is used to simulate the barcode information. Test setup gets the data via an HTTP `GET` request from the Mockaroo server.
 
-The object of the tests is the `ViewModels` package, with the focus on the `ViewModels.ContenViewModel` object. The test process ensures that the data manipulation performs save, without any errors.
+The object of the tests is the `ViewModels` package, with the focus on the `ViewModels.ContenViewModel` object. The test process ensures that the data managment performs save, without any errors.
 
 The detailed code coverage report is shown below.
 
