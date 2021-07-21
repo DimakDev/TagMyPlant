@@ -151,7 +151,7 @@ static `ViewModels.CoreDataManager` object. The object sends requests to
 access the data from a SQLite database. The database has only one data
 model for the entity `Barcode`.
 
-![Simulator: navigation and camera views](images/simulator_environment.png)
+![Simulator: navigation and camera views](Images/simulator_environment.png)
 
 The application works in horizontal and vertical orientation. The dark
 theme is optional, it can be changed in user settings. The app should
@@ -191,7 +191,7 @@ UI functionality can be also easily validated.
 The following images represent the application in production
 environment.
 
-![Application: production environment](images/production_environment.png)
+![Application: production environment](Images/production_environment.png)
 
 # Summary
 
