@@ -48,7 +48,7 @@ struct ContentView: View {
     
     private var deleteAllBarcodesDismissAlert: Alert {
         Alert(
-            title: Text("There is no data stored"),
+            title: Text("There is no data"),
             dismissButton: .default(Text("Got it"))
         )
     }

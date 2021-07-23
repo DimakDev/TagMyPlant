@@ -1,3 +1,11 @@
+====== Project report: Tag my Plant ======
+
+Autor: Dmytro Kostiuk
+
+Major: Electrical engineering
+
+Matriculation number: ***REMOVED***
+
 ====== Motivation ======
 
 Today we can see barcodes on nearly every product. They represent a piece of information. This information is machine-readable. It is mostly used to identify a product.
@@ -65,7 +73,7 @@ The following list of features and requirements becomes a foundation for further
 
 One of the main objectives is to design user interactions scenarios. It is a kind of brainstorming where different ideas can find their places on a canvas. The list of requirements helps to find an appropriate layout design and provide a well-suited functionality.
 
-{{Images/ui_ux_sketch.png| Sketch: user interface and user experience design}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:ui_ux_sketch.png?nolink&600 |}}
 
 As we see on the sketch above. There are two main views.
 
@@ -99,21 +107,47 @@ The scanning system in this project was implemented with CarBode framework. The 
 
 The scanning solution should be able to scan 1D and 2D barcodes. This option can be configurable. Using Regex it should differentiate between types of barcode information and use it accordingly. For example, if it is a link, the user can open it.
 
+==== UPD: Barcode scanner frameworks ====
+
+Which barcode scanner frameworks were comparing?
+
+^Framework                                                                 ^Description                                          ^
+|[[https://developer.apple.com/av-foundation/|AVFoundation]]               |Apple native framework                               |
+|[[https://github.com/twostraws/CodeScanner|CodeScanner]]                  |Open source framework (build on top of AVFundation)  |
+|[[https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI|CarBode]]  |Open source framework (build on top of AVFundation)  |
+
+What metrics were used?
+
+From most important to less important.
+
+  - Out-of-box **functionality** (well suited for the app).
+  - Easy to **implement**.
+  - **Community**.
+
+Conclusion.
+
+Using star rating from 1 to 5.
+
+^Framework     ^Functionality  ^Implementation  ^Community      ^
+|AVFoundation  |%%**%%%%**%%*  |%%**%%*         |%%**%%%%**%%*  |
+|CodeScanner   |%%**%%%%**%%   |%%**%%%%**%%*   |%%**%%*        |
+|**CarBode**   |%%**%%%%**%%*  |%%**%%%%**%%*   |%%**%%         |
+
 ====== Implementation ======
 
 Project environment setup is an essential part of the development process. The Xcode IDE offers good functionality, GitHub integration and code management tools.
 
 According to the MVVM pattern the architecture of the application was implemented using three packages namely ''%%Views%%'', ''%%ViewModels%%'', ''%%Models%%''.
 
-The views in the package ''%%Views%%'' represent the UI. It is a container used only to display the data. The main view ''%%Views.ContentView%%'' observes the ''%%ViewModels.ContentViewModel%%'', which is an ''%%ObservableObject%%''. The changes in the **published** data of the ''%%ObservableObject%%'' are immediately trigger an update in the ''%%Views%%'' package.
+The views in the package ''%%Views%%'' represent the UI. It is a container used only to display the data. The main view ''%%Views.ContentView%%'' observes the ''%%ViewModels.ContentViewModel%%'', which is an ''%%ObservableObject%%''. The changes in the **published** data of the ''%%ObservableObject%%'' immediately trigger an update in the ''%%Views%%'' package.
 
 The barcode scanner uses the camera view to capture and scan the barcodes. It is implemented in the ''%%Views.BarcodeScannerView%%'' and serves the incoming barcode information for the ''%%ObservableObject%%''.
 
-{{PlantUML/class_diagram.png| Application class diagram}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:class_diagram.png?nolink&1000 |}}
 
-''%%ViewModels%%'' package keeps track of its state. It cares about how the data is created, updated and deleted. The ''%%ObservableObject%%'' uses a static ''%%ViewModels.CoreDataManager%%'' object. The object sends requests to access the data from a SQLite database. The database has only one data model for the entity ''%%Barcode%%''.
+''%%ViewModels%%'' package keeps track of its state. It cares about how the data is created, updated and deleted. The ''%%ObservableObject%%'' uses a static ''%%ViewModels.CoreDataManager%%'' object. The object sends requests to access the data from the SQLite database. The database has only one data model for the entity ''%%Barcode%%''.
 
-{{images/simulator_environment.png| Simulator: navigation and camera views}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:simulator_environment.png?nolink&600 |}}
 
 The application works in horizontal and vertical orientation. The dark theme is optional, it can be changed in user settings. The app should work on all iOS devices with the newest iOS (v14+).
 
@@ -121,25 +155,29 @@ The application works in horizontal and vertical orientation. The dark theme is 
 
 The verification process aims to check the code with the intent of finding failures. To make the application perform well, it should not contain critical errors and bugs.
 
-{{Images/mock_data_example.png| Mockaroo mock data example}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:mock_data_example.png?nolink&600 |}}
 
-The mock data can be generated using Mockaroo service. That data is used to simulate the barcode information. Test setup gets the data via an HTTP ''%%GET%%'' request from the Mockaroo server.
+The mock data can be generated using Mockaroo service. That data is used to simulate the barcode information. Tests' setup gets the data via HTTP ''%%GET%%'' request from the Mockaroo server.
 
 The object of the tests is the ''%%ViewModels%%'' package, with the focus on the ''%%ViewModels.ContenViewModel%%'' object. The test process ensures that the data managment performs save, without any errors.
 
 The detailed code coverage report is shown below.
 
-{{Images/code_coverage_report.png| Code coverage report}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:code_coverage_report.png?nolink&600 |}}
 
 ====== Validation ======
 
-The target device iPhone SE2 is used to validate the functionality of the application in the production environment. In a wireless mode, the smartphone can send debug information to the IDE console. This information can be used to identify bugs and errors.
+The target device iPhone SE2 is used to validate the functionality of the application in the production environment. The smartphone can send wireless debug information to the IDE console. This information can be used to identify bugs and errors.
 
 Using the online barcode generator tool, different barcode types can be generated and used by the validation process. Using the smartphone, the UI functionality can be also easily validated.
 
 The following images represent the application in production environment.
 
-{{images/production_environment.png| Application: production environment}}
+{{ :protele:documentation:codeimager:kostiuk_dmytro:production_environment.png?nolink&600 |}}
+
+===== UPD: Supported Machine-Readable Object Types =====
+
+Different [[https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/machine-readable_object_types|Machine-Readable Object Types]] can be supported by the application. In the particular implementation the types ''%%qr%%'', ''%%code39%%'' and ''%%code128%%'' were used for the verification and validation purpose.
 
 ====== Summary ======
 
@@ -154,6 +192,14 @@ Other ideas and improvements have their place. The focus was on the basic functi
 
 ====== References ======
 
-  - 1D and 2D Barcode Scanning: What is the Difference? | Lowry Solutions. (2021). Retrieved 21 July 2021, from https:%%//%%lowrysolutions.com/blog/what-is-the-difference-between-1d-and-2d-barcode-scanning/
-  - (2021). Retrieved 21 July 2021, from https:%%//%%www.brainvire.com/six-benefits-of-using-mvc-model-for-effective-web-application-development/
-  - Wang, M. (2021). What’s the difference between MVC and MVVM? | fjorge. Retrieved 21 July 2021, from https:%%//%%fjorgedigital.com/insights/blog/whats-the-difference-between-mvc-and-mvvm/
+[1]: 1D and 2D Barcode Scanning: What is the Difference? | Lowry Solutions. (2021). Retrieved 21 July 2021, from https://lowrysolutions.com/blog/what-is-the-difference-between-1d-and-2d-barcode-scanning/
+
+[2]: (2021). Retrieved 21 July 2021, from https://www.brainvire.com/six-benefits-of-using-mvc-model-for-effective-web-application-development/
+
+[3]: Wang, M. (2021). What's the difference between MVC and MVVM? | fjorge. Retrieved 21 July 2021, from https://fjorgedigital.com/insights/blog/whats-the-difference-between-mvc-and-mvvm/
+
+====== Appendix ======
+
+  * GitHub repo: {{ :protele:documentation:codeimager:kostiuk_dmytro:tagmyplant-main.zip |}}
+  * Presentation: {{ :protele:documentation:codeimager:kostiuk_dmytro:tagmyplant.pdf |}}
+  * Change report language approval: {{ :protele:documentation:codeimager:kostiuk_dmytro:2021_07_05_projekt_englisch_sign.pdf |}}
