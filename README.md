@@ -3,4 +3,8 @@
   <h2>TagMyPlant</h2>
 </p>
 
+# Description
+
 Project iAT Teleautomation TagMyPlant.
+
+iOS App Barcode Scanner
