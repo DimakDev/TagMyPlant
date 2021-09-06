@@ -38,3 +38,31 @@ There are several frameworks can be used to implement a barcode scanning solutio
 The scanning system in this project was implemented with CarBode framework. The framework has a simple API with a configurable functionality. The framework can be easily integrated and is well documented.
 
 The scanning solution should be able to scan 1D and 2D barcodes. This option can be configurable. Using Regex it should differentiate between types of barcode information and use it accordingly. For example, if it is a link, the user can open it.
+
+### UPD: Barcode scanner frameworks
+
+Which barcode scanner frameworks were comparing?
+
+| Framework | Description |
+| :-------- | :---------- |
+| [AVFoundation](https://developer.apple.com/av-foundation/) | Apple native framework |
+| [CodeScanner](https://github.com/twostraws/CodeScanner) | Open source framework (build on top of AVFoundation) |
+| [CarBode](https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI) | Open source framework (build on top of AVFoundation) |
+
+What metrics were used?
+
+From most important to less important.
+
+1.  Out-of-box **functionality** (well suited for the app).
+2.  Easy to **implement**.
+3.  **Community**.
+
+Conclusion.
+
+Using star rating from 1 to 5.
+
+| Framework    | Out-of-box functionality | Easy to implement | Community  |
+|:-------------|:-------------------------|:------------------|:-----------|
+| AVFoundation | \*\*\*\*\*               | \*\*\*            | \*\*\*\*\* |
+| CodeScanner  | \*\*\*\*                 | \*\*\*\*\*        | \*\*\*     |
+| **CarBode**  | \*\*\*\*\*               | \*\*\*\*\*        | \*\*       |

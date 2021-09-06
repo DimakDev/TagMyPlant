@@ -18,12 +18,14 @@ the user.
 
 # Tools
 
-There is a wide variety of tools on the market can be used to develop a mobile application. The list below was based on a personal preference and tools I have experience with.
+There is a wide variety of tools on the market can be used to develop a
+mobile application. The list below was based on a personal preference
+and tools I have experience with.
 
 ## Concept
 
 | Tool                                                                                               | Description                           |
-| :------------------------------------------------------------------------------------------------- | :------------------------------------ |
+|:---------------------------------------------------------------------------------------------------|:--------------------------------------|
 | [Concepts](https://concepts.app/en/)                                                               | Sketching and drawing                 |
 | [Figma](https://www.figma.com)                                                                     | Wire-framing and prototyping          |
 | [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) | User interface resource for designing |
@@ -31,7 +33,7 @@ There is a wide variety of tools on the market can be used to develop a mobile a
 ## Development
 
 | Tool                                                                    | Description                        |
-| :---------------------------------------------------------------------- | :--------------------------------- |
+|:------------------------------------------------------------------------|:-----------------------------------|
 | [Xcode](https://developer.apple.com/xcode/)                             | Integrated development environment |
 | [Swift](https://developer.apple.com/swift/)                             | Programming language               |
 | [SwiftUI](https://developer.apple.com/xcode/swiftui/)                   | User interface framework           |
@@ -46,7 +48,7 @@ There is a wide variety of tools on the market can be used to develop a mobile a
 ## Documentation
 
 | Tool                                                  | Description                    |
-| :---------------------------------------------------- | :----------------------------- |
+|:------------------------------------------------------|:-------------------------------|
 | [iA Writer](https://ia.net/writer)                    | Markdown editor                |
 | [Pandoc](https://pandoc.org)                          | Markdown to DokuWiki converter |
 | [Marked 2](https://marked2app.com)                    | DokuWiki previewer             |
@@ -86,42 +88,89 @@ further development.
 
 ## UI/UX design
 
-One of the main objectives is to design user interactions scenarios. It is a kind of brainstorming where different ideas can find their places on a canvas. The list of requirements helps to find an appropriate layout design and provide a well-suited functionality.
+One of the main objectives is to design user interactions scenarios. It
+is a kind of brainstorming where different ideas can find their places
+on a canvas. The list of requirements helps to find an appropriate
+layout design and provide a well-suited functionality.
 
-![Sketch: user interface and user experience design](Images/ui_ux_sketch.png)
+![Sketch: user interface and user experience
+design](Images/ui_ux_sketch.png)
 
 As we see on the sketch above. There are two main views.
 
 -   **Navigation view** represents the barcode information to the user.
 -   **Camera view** is a scanner view to capture and scan the barcodes.
 
-The list of the features aims to provide a seamless and pleasant user experience.
+The list of the features aims to provide a seamless and pleasant user
+experience.
 
 ## Architecture
 
-The application can be divided into three interconnected parts namely the model, the view, and the controller. All of these components are designed to handle some specific logical aspects of the application. [2]
+The application can be divided into three interconnected parts namely
+the model, the view, and the controller. All of these components are
+designed to handle some specific logical aspects of the application.
+\[2\]
 
-The Model-View-ViewModel (MVVM) was chosen as an architecture pattern for the application.
+The Model-View-ViewModel (MVVM) was chosen as an architecture pattern
+for the application.
 
-It can be useful to define the main parts of the pattern. [3]
+It can be useful to define the main parts of the pattern. \[3\]
 
 | Part name | Function                    |
-| :-------- | :-------------------------- |
+|:----------|:----------------------------|
 | Model     | Store data                  |
 | View      | Display data                |
 | ViewModel | Create, update, delete data |
 
-According to the data persistence requirement, the data should be stored in a database. It can't be lost, if the app was closed.
+According to the data persistence requirement, the data should be stored
+in a database. It can’t be lost, if the app was closed.
 
-Using a native CoreData framework, the data persistence requirement can be satisfied.
+Using a native CoreData framework, the data persistence requirement can
+be satisfied.
 
 ## Functionality
 
-There are several frameworks can be used to implement a barcode scanning solution using the camera on a smartphone. All of them offer a wide range of functionality that satisfies the functional requirements.
+There are several frameworks can be used to implement a barcode scanning
+solution using the camera on a smartphone. All of them offer a wide
+range of functionality that satisfies the functional requirements.
 
-The scanning system in this project was implemented with CarBode framework. The framework has a simple API with a configurable functionality. The framework can be easily integrated and is well documented.
+The scanning system in this project was implemented with CarBode
+framework. The framework has a simple API with a configurable
+functionality. The framework can be easily integrated and is well
+documented.
 
-The scanning solution should be able to scan 1D and 2D barcodes. This option can be configurable. Using Regex it should differentiate between types of barcode information and use it accordingly. For example, if it is a link, the user can open it.
+The scanning solution should be able to scan 1D and 2D barcodes. This
+option can be configurable. Using Regex it should differentiate between
+types of barcode information and use it accordingly. For example, if it
+is a link, the user can open it.
+
+### UPD: Barcode scanner frameworks
+
+Which barcode scanner frameworks were comparing?
+
+| Framework                                                               | Description                                          |
+|:------------------------------------------------------------------------|:-----------------------------------------------------|
+| [AVFoundation](https://developer.apple.com/av-foundation/)              | Apple native framework                               |
+| [CodeScanner](https://github.com/twostraws/CodeScanner)                 | Open source framework (build on top of AVFoundation) |
+| [CarBode](https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI) | Open source framework (build on top of AVFoundation) |
+
+What metrics were used?
+
+From most important to less important.
+
+1.  Out-of-box **functionality** (well suited for the app).
+2.  Easy to **implement**.
+3.  **Community**.
+
+Conclusion.
+
+Using star rating from 1 to 5.
+
+| Framework    | Out-of-box functionality | Easy to implement | Community  |
+|:-------------|:-------------------------|:------------------|:-----------|
+| AVFoundation | \*\*\*\*\*               | \*\*\*            | \*\*\*\*\* |
+| CodeScanner  | \*\*\*\*                 | \*\*\*\*\*        | \*\*\*     |
+| **CarBode**  | \*\*\*\*\*               | \*\*\*\*\*        | \*\*       |
 
 # Implementation
 
@@ -151,7 +200,8 @@ static `ViewModels.CoreDataManager` object. The object sends requests to
 access the data from a SQLite database. The database has only one data
 model for the entity `Barcode`.
 
-![Simulator: navigation and camera views](Images/simulator_environment.png)
+![Simulator: navigation and camera
+views](Images/simulator_environment.png)
 
 The application works in horizontal and vertical orientation. The dark
 theme is optional, it can be changed in user settings. The app should
@@ -191,7 +241,16 @@ UI functionality can be also easily validated.
 The following images represent the application in production
 environment.
 
-![Application: production environment](Images/production_environment.png)
+![Application: production
+environment](Images/production_environment.png)
+
+## UPD: Supported Machine-Readable Object Types
+
+Different [Machine-Readable
+ObjectTypes](https://developer.apple.com/documentation/avfoundation/avmetadatamachinereadablecodeobject/machine-readable_object_types)
+can be supported by the application. In the particular implementation
+the types `qr`, `code39` and `code128` were used for the verification
+and validation purpose.
 
 # Summary
 
@@ -214,8 +273,13 @@ application can be improved to meet their individual requirements.
 
 # References
 
-1. 1D and 2D Barcode Scanning: What is the Difference? | Lowry Solutions. (2021). Retrieved 21 July 2021, from https://lowrysolutions.com/blog/what-is-the-difference-between-1d-and-2d-barcode-scanning/
+\[1\]: 1D and 2D Barcode Scanning: What is the Difference? \| Lowry
+Solutions. (2021). Retrieved 21 July 2021, from
+https://lowrysolutions.com/blog/what-is-the-difference-between-1d-and-2d-barcode-scanning/
 
-1. (2021). Retrieved 21 July 2021, from https://www.brainvire.com/six-benefits-of-using-mvc-model-for-effective-web-application-development/
+\[2\]: (2021). Retrieved 21 July 2021, from
+https://www.brainvire.com/six-benefits-of-using-mvc-model-for-effective-web-application-development/
 
-1. Wang, M. (2021). What's the difference between MVC and MVVM? | fjorge. Retrieved 21 July 2021, from https://fjorgedigital.com/insights/blog/whats-the-difference-between-mvc-and-mvvm/
+\[3\]: Wang, M. (2021). What’s the difference between MVC and MVVM? \|
+fjorge. Retrieved 21 July 2021, from
+https://fjorgedigital.com/insights/blog/whats-the-difference-between-mvc-and-mvvm/
